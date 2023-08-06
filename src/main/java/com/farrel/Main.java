@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,11 +23,13 @@ public class Main {
     }
 
     @GetMapping("/greet")
-    public GreetResponse greet() {
+    public GreetResponse greet(@RequestParam(value = "name", required = false) String name) {
         //return "Hello";
         //return new GreetResponse("Hello");
+
+        String greetMessage = name == null || name.isBlank() ? "Hello" : "Hello " + name;
         return new GreetResponse(
-                "Hello",
+                greetMessage,
                 List.of("Java", "Golang", "Javascript"),
                 new Person("Alex", 18, 10_000)
         );
