@@ -1,5 +1,6 @@
 package com.farrel.customer;
 
+import com.farrel.exception.ResourceNotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,6 @@ public class CustomerService {
     public Customer getCustomer(Integer id) {
         return customerDao
                 .findCustomerById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Customer Not Found"));
+                .orElseThrow(() -> new ResourceNotFound("Customer Not Found"));
     }
 }

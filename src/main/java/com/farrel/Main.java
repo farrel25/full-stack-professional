@@ -14,7 +14,7 @@ public class Main {
         //SpringApplication.run(Main.class, args);
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Main.class, args);
 
-        printBean(applicationContext);
+        //printBean(applicationContext);
     }
 
     @Bean(name = "foo")
