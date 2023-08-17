@@ -1,9 +1,6 @@
 package com.farrel.customer;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,23 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     public Customer getCustomer(@PathVariable(value = "customerId") Integer customerId) {
         return customerService.getCustomer(customerId);
+    }
+
+    @PostMapping
+    public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
+        customerService.insertCustomer(customerRegistrationRequest);
+    }
+
+    @PutMapping("/{customerId}")
+    public void registerCustomer(
+            @PathVariable(value = "customerId") Integer customerId,
+            @RequestBody CustomerUpdateRequest customerUpdateRequest
+    ) {
+        customerService.updateCustomer(customerId, customerUpdateRequest);
+    }
+
+    @DeleteMapping("/{customerId}")
+    public void deleteCustomer(@PathVariable(value = "customerId") Integer customerId) {
+        customerService.deleteCustomer(customerId);
     }
 }
