@@ -1,3 +1,45 @@
+#NOTES
+
+# to run the container
+# docker compose up -d
+# -d means detach
+
+# see running container
+# docker compose ps
+# docker ps
+# docker container ls
+
+# to enter inside container terminal / bash into the container
+# docker exec -it postgres bash
+# postgres is the container name
+# -it means Interactive Mode
+
+# to quit from container bash / terminal
+# ctrl + d
+
+# to enter inside postgres terminal / psql (the interactive shell client of postgresql)
+# psql -U farrel
+# farrel is the username of the postgres
+
+# to quit from psql
+# \q
+
+# to list databases
+# \l
+
+# to connect to a database
+# \c database_name
+
+# to list the tables
+# \dt
+
+# to see the connection pool
+# SELECT * FROM pg_stat_activity;
+# before press enter, we can press ctrl + c and type \x to expand display
+
+# ctrl + l
+# clear the psql screen
+
 services:
   db:
     container_name: postgres

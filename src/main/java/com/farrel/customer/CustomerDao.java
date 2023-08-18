@@ -7,15 +7,15 @@ public interface CustomerDao {
 
     List<Customer> findAllCustomers();
 
-    Optional<Customer> findCustomerById(Integer id);
+    Optional<Customer> findCustomerById(Long id);
 
     void insertCustomer(Customer customer);
 
     void updateCustomer(Customer customer);
 
-    boolean existsById(Integer id);
+    boolean existsById(Long id);
 
     boolean existsByEmail(String email);
 
-    void deleteCustomer(Integer id);
+    void deleteCustomer(Long id);
 }

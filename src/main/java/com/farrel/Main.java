@@ -2,6 +2,8 @@ package com.farrel;
 
 import com.farrel.customer.Customer;
 import com.farrel.customer.CustomerRepository;
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 @RestController
@@ -25,11 +28,18 @@ public class Main {
     @Bean
     CommandLineRunner runner(CustomerRepository customerRepository) {
         return args -> {
-            Customer alex = new Customer("Alex", "alex@domain.com", 21);
-            Customer jamila = new Customer("Jamila", "jamila@domain.com", 19);
-            List<Customer> customers = List.of(alex, jamila);
+            Faker faker = new Faker();
 
-            customerRepository.saveAll(customers);
+            Name name = faker.name();
+            String firstName = name.firstName();
+            String lastName = name.lastName();
+            Customer customer = new Customer(
+                    firstName + " " + lastName,
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@domain.com",
+                    new Random().nextInt(16, 99)
+            );
+
+            customerRepository.save(customer);
         };
     }
 
