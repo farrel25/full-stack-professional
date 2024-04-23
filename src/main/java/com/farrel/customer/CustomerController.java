@@ -30,7 +30,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    public void registerCustomer(
+    public void updateCustomer(
             @PathVariable(value = "customerId") Long customerId,
             @RequestBody CustomerUpdateRequest customerUpdateRequest
     ) {
