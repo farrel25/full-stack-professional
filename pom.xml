@@ -8,14 +8,22 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.farrel</groupId>
-	<artifactId>spring-boot-example</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>farrel-api</artifactId>
+	<version>1.0-SNAPSHOT</version>
 	<name>spring-boot-example</name>
 	<description>Demo project for Spring Boot</description>
+	<organization>
+		<name>farrel</name>
+		<url>https://www.linkedin.com/in/farrel-athaillah-putra/</url>
+	</organization>
+
 	<properties>
 		<java.version>17</java.version>
+		<docker.username>farrelputra</docker.username>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -154,6 +162,38 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.2</version>
+				<configuration>
+					<from>
+						<image>eclipse-temurin:17</image>
+						<platforms>
+							<platform>
+								<architecture>arm64</architecture>
+								<os>linux</os>
+							</platform>
+							<platform>
+								<architecture>amd64</architecture>
+								<os>linux</os>
+							</platform>
+						</platforms>
+					</from>
+					<to>
+						<!--COMMAND LINE-->
+						<!-- to build image = mvn package jib:build -->
+						<!-- to run image = docker {dash}{dash}name farrel-api {dash}{dash}rm -p 8484:8080 farrelputra/farrel-api -->
+						<!-- to run image = docker {dash}{dash}name farrel-api {dash}{dash}rm -p 8484:8080 {dash}{dash}network spring-boot-example_postgres farrelputra/farrel-api {dash}{dash}spring.datasource.url=jdbc:postgresql://db:5432/customer-->
+						<!--<image>docker.io/${organization.name}/${project.artifactId}:${project.version}</image>-->
+						<image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+						<tags>
+							<tag>latest</tag>
+						</tags>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

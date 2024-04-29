@@ -4,6 +4,10 @@
 # docker compose up -d
 # -d means detach
 
+# docker compose down = remove everything thar run from docker compose.
+# docker compose stop = stop all the container that run from docker compose.
+# docker compose start
+
 # see running container
 # docker compose ps
 # docker ps
@@ -55,6 +59,7 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
 #  pgadmin:
 #    container_name: pgadmin
 #    image: dpage/pgadmin4
@@ -71,6 +76,21 @@ services:
 #    restart: unless-stopped
 #    depends_on:
 #      - db
+
+  farrel-api:
+    container_name: farrel-api
+    image: farrelputra/farrel-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/customer
+    ports:
+      - "8088:8080"
+    networks:
+      - postgres
+    depends_on:
+      - db
+    restart: unless-stopped
+#    command:
+#      - --spring.datasource.url=jdbc:postgresql://db:5432/customer
 
 networks:
   postgres:
